@@ -1,4 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
+import { RoverModule } from '../rover/rover.module';
 import { FileController } from './file.controller';
 import { FileService } from './file.service';
 
@@ -7,6 +8,7 @@ describe('FileController', () => {
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
+      imports: [RoverModule],
       controllers: [FileController],
       providers: [FileService],
     }).compile();

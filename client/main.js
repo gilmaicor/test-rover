@@ -6,10 +6,20 @@ async function fileUpload(formElement) {
       method: 'POST',
       body: formData,
       dataType: 'jsonp',
-    });
+    })
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (data) {
+        return data; // this will be a string
+      });
 
-    if (response.status === 200 || response.status === 201) {
+    if (response.length) {
       alert('successfully uploaded file');
+      const output = response.map((rover) => {
+        return `<tr><td>${rover.x}</td><td>${rover.y}</td><td>${rover.cardinal}</td></tr>`;
+      });
+      document.querySelector('#header').innerHTML = output.join('');
     } else {
       alert('failed to upload');
     }
